@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100b18">
+<title>Happy Birthday Baban ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+*{box-sizing:border-box}
+:root{
+  --bg:#100b18;--bg2:#1b1024;--card:rgba(35,20,45,.82);
+  --text:#fff7fb;--muted:#d9bfd0;--pink:#e9a9c4;--rose:#c9799d;
+  --gold:#e8c98b;--line:rgba(255,255,255,.13);
+}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+body{
+  font-family:"DM Sans",sans-serif;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(174,83,132,.18),transparent 30%),
+    radial-gradient(circle at 85% 85%,rgba(112,73,150,.18),transparent 35%),
+    linear-gradient(145deg,#0d0913,#1a0d21 55%,#0d0914);
+}
+#app{height:100vh;height:100svh;position:relative}
+.screen{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:24px;opacity:0;visibility:hidden;transform:translateY(18px) scale(.985);
+  transition:opacity .65s ease,transform .65s ease,visibility .65s;
+}
+.screen.active{opacity:1;visibility:visible;transform:none}
+.card{
+  width:min(720px,94vw);max-height:88vh;overflow:auto;
+  padding:30px 24px;border:1px solid var(--line);border-radius:28px;
+  background:var(--card);backdrop-filter:blur(14px);
+  box-shadow:0 20px 70px rgba(0,0,0,.38);text-align:center;
+}
+h1,h2{font-family:"Cormorant Garamond",serif;margin:8px 0 14px}
+h1{font-size:clamp(42px,10vw,72px);line-height:.95}
+h2{font-size:clamp(32px,8vw,52px)}
+p{font-size:clamp(16px,4vw,20px);line-height:1.65;color:var(--muted);margin:10px auto;max-width:600px}
+.small{font-size:14px;color:#b99eaf}
+button{
+  border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:13px 22px;
+  margin-top:18px;background:linear-gradient(135deg,#c9799d,#8f5276);
+  color:white;font:600 15px "DM Sans";cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.25)
+}
+button:active{transform:scale(.97)}
+.photo{
+  display:block;width:min(430px,82vw);max-height:48vh;object-fit:cover;
+  margin:18px auto;border-radius:20px;border:1px solid var(--line);
+  box-shadow:0 12px 35px rgba(0,0,0,.35)
+}
+.date{color:var(--gold);font-size:14px;letter-spacing:2px;text-transform:uppercase}
+.heart{font-size:44px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.progress{position:fixed;top:13px;left:50%;transform:translateX(-50%);z-index:50;
+  width:min(420px,72vw);height:3px;background:rgba(255,255,255,.12);border-radius:5px}
+.progress i{display:block;height:100%;width:0;background:var(--pink);transition:width .6s}
+.dots{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:6px}
+.dots span{width:6px;height:6px;border-radius:50%;background:#6e5365}.dots span.on{background:var(--pink);width:18px;border-radius:5px}
+.memory{font-family:"Cormorant Garamond",serif;font-size:24px;color:#fff}
+.choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.choice{background:#2a172e}
+.cake-wrap{margin:22px auto 8px;position:relative;width:230px;height:210px}
+.plate{position:absolute;bottom:15px;left:10px;width:210px;height:22px;border-radius:50%;background:#e6cbd7}
+.cake{position:absolute;bottom:35px;left:30px;width:170px;height:110px;border-radius:15px 15px 22px 22px;
+ background:linear-gradient(#d58a9e 0 30%,#7b3e57 31% 100%);box-shadow:0 9px 0 #552c40}
+.icing{position:absolute;top:-12px;left:-4px;width:178px;height:35px;border-radius:50%;background:#f3d5df}
+.candle{position:absolute;top:-78px;left:80px;width:10px;height:68px;background:#f5cbd8;border-radius:5px}
+.flame{position:absolute;top:-104px;left:74px;font-size:30px;cursor:pointer;filter:drop-shadow(0 0 8px #ff9)}
+.cake.cut .cake{clip-path:polygon(0 0,65% 0,45% 50%,100% 50%,100% 100%,0 100%)}
+.cake.cut{transform:translateX(-4px)}
+#toast{position:fixed;top:24px;left:50%;transform:translate(-50%,-20px);opacity:0;
+z-index:100;background:#2a172e;border:1px solid var(--line);padding:12px 18px;border-radius:14px;color:white;transition:.35s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.final{font-size:24px!important;color:#fff!important;font-family:"Cormorant Garamond",serif}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="progress"><i id="bar"></i></div>
+  <div class="dots" id="dots"></div>
+  <div id="toast"></div>
+
+  <section class="screen active" id="s0">
+    <div class="card">
+      <div class="heart">♡</div>
+      <div class="date">A little birthday surprise</div>
+      <h1>Happy Birthday,<br>Baban</h1>
+      <p>Made with love, memories and a tiny bit of mischief. ❤️</p>
+      <button onclick="next()">Open your surprise</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s1">
+    <div class="card">
+      <div class="date">24 November 2024</div>
+      <h2>The First “?”</h2>
+      <p>I had no idea that one little moment would slowly become such a beautiful part of my life.</p>
+      <button onclick="next()">Continue ♡</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s2">
+    <div class="card">
+      <div class="date">15 January 2025</div>
+      <h2>Laketown Park</h2>
+      <p>The day that became one of our favourite memories. Some places become special simply because we were there together.</p>
+      <button onclick="next()">Next memory</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s3">
+    <div class="card">
+      <div class="date">A little closer</div>
+      <h2>The First Time We Held Hands</h2>
+      <img class="photo" src="first-hand-holding.jpg" alt="First time we held hands">
+      <p>That tiny touch somehow said much more than words.</p>
+      <button onclick="next()">Keep going ♡</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s4">
+    <div class="card">
+      <div class="date">A memory I keep</div>
+      <h2>Our First Photo Together</h2>
+      <img class="photo" src="first-photo-together.jpg" alt="Our first photo together">
+      <p>One photo. One moment. A memory I never want to lose.</p>
+      <button onclick="next()">Next</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s5">
+    <div class="card">
+      <div class="date">A little warmth</div>
+      <h2>The First Hug</h2>
+      <p>Somewhere between that hug and everything that followed, you became home in a way I never expected.</p>
+      <button onclick="next()">Next memory</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s6">
+    <div class="card">
+      <div class="date">And then…</div>
+      <h2>The First Kiss</h2>
+      <img class="photo" src="first-kiss.jpg" alt="First kiss">
+      <p>One of those moments that stays in your mind a little longer than the others.</p>
+      <button onclick="next()">Next</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s7">
+    <div class="card">
+      <div class="date">Favourite little things</div>
+      <h2>Our Favourite Memories</h2>
+      <img class="photo" src="favourite-1.jpg" alt="Favourite memory one">
+      <p>It is not always the big moments. Sometimes it is simply us being us.</p>
+      <button onclick="next()">One more</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s8">
+    <div class="card">
+      <div class="date">Another favourite</div>
+      <h2>One More Memory ♡</h2>
+      <img class="photo" src="favourite-2.jpg" alt="Favourite memory two">
+      <p>Every ordinary day feels a little less ordinary with you.</p>
+      <button onclick="next()">Next</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s9">
+    <div class="card">
+      <div class="date">You make me smile</div>
+      <h2>The Funny Bite</h2>
+      <img class="photo" src="funny-bite.jpg" alt="Funny bite memory">
+      <p>And of course, our ridiculous little moments deserve a place here too. 😌</p>
+      <button onclick="next()">Continue</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s10">
+    <div class="card">
+      <div class="date">Just us</div>
+      <h2>Romantic</h2>
+      <img class="photo" src="romantic.jpg" alt="Romantic memory">
+      <p class="memory">“I never knew a person could become such a beautiful part of my everyday life.”</p>
+      <button onclick="next()">Next ♡</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s11">
+    <div class="card">
+      <div class="date">Your birthday</div>
+      <h2>Now… make a wish 🎂</h2>
+      <p>Tap the flame to cut the cake.</p>
+      <div class="cake-wrap">
+        <div class="plate"></div>
+        <div class="cake" id="cake"><div class="icing"></div><div class="candle"></div><div class="flame" id="flame" onclick="cutCake()">🕯️</div></div>
+      </div>
+      <button id="cakeBtn" onclick="cutCake()">Cut the cake 🎂</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s12">
+    <div class="card">
+      <div class="date">One last thing</div>
+      <h2>Happy Birthday, my love ♡</h2>
+      <p class="final">You are the best thing I never planned.</p>
+      <p>May this year bring you everything your heart quietly wishes for. And may I get to be there for as many of those moments as possible.</p>
+      <p>Happy Birthday, Baban. ❤️</p>
+      <button onclick="restart()">Read it again</button>
+    </div>
+  </section>
+</div>
+
+<audio id="music" src="until-i-found-you.mp3" preload="auto"></audio>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+let current=0;
+let musicStarted=false;
+let cakeCut=false;
+
+const AUTO_TIMES=[0,9000,9000,11000,12000,10000,11000,11000,11000,10000,11000,0,0];
+let timer=null;
+
+const bar=document.getElementById('bar');
+const dots=document.getElementById('dots');
+screens.forEach((_,i)=>{
+  const d=document.createElement('span');
+  d.onclick=()=>go(i);
+  dots.appendChild(d);
+});
+
+function updateUI(){
+  screens.forEach((s,i)=>s.classList.toggle('active',i===current));
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===current));
+  bar.style.width=((current/(screens.length-1))*100)+'%';
+}
+
+function startMusic(){
+  if(musicStarted)return;
+  musicStarted=true;
+  const a=document.getElementById('music');
+  a.volume=.65;
+  a.play().catch(()=>{});
+}
+
+function go(i){
+  if(i<0||i>=screens.length)return;
+  clearTimeout(timer);
+  current=i;
+  updateUI();
+  startMusic();
+
+  // Every page remains long enough to read. The cake and final pages wait for a tap.
+  if(AUTO_TIMES[current]>0){
+    timer=setTimeout(()=>next(),AUTO_TIMES[current]);
+  }
+}
+
+function next(){ go(current+1); }
+
+function cutCake(){
+  if(cakeCut){
+    next();
+    return;
+  }
+  cakeCut=true;
+  document.getElementById('cake').classList.add('cut');
+  document.getElementById('flame').textContent='✨';
+  document.getElementById('cakeBtn').textContent='Make your wish ♡';
+  toast('Cake cut! Now make your birthday wish. 🎂❤️');
+  setTimeout(()=>next(),1800);
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function restart(){
+  cakeCut=false;
+  document.getElementById('cake').classList.remove('cut');
+  document.getElementById('flame').textContent='🕯️';
+  document.getElementById('cakeBtn').textContent='Cut the cake 🎂';
+  go(0);
+}
+
+document.addEventListener('click',e=>{
+  if(e.target.tagName==='BUTTON' || e.target.id==='flame') startMusic();
+});
+
+// No duplicate "First Photo Together" section and no empty photo placeholders.
+// Only real image files are referenced above.
+updateUI();
+</script>
+</body>
+</html>
